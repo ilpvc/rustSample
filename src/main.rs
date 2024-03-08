@@ -1,4 +1,7 @@
 mod http;
+mod sql;
+mod test;
+
 use http::http_request;
 
 fn main() {

@@ -5,11 +5,8 @@ pub fn send_get_request(host: &str, port: i32, path: &str) -> Result<String, std
     let mut stream = net::TcpStream::connect(format!("{}:{}", host, port))?;
     let request = format!("GET {} HTTP/1.1\r\nHost: {}\r\nConnection: close\r\n\r\n", path, host);
     stream.write_all(request.as_bytes())?;
-
     let mut response = String::new();
-
     stream.read_to_string(&mut response)?;
-
     Ok(response)
 }
 
