@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests{
     use crate::sql::sqlite;
-    use crate::sql::sqlite::curd::select_all_person;
+    use crate::sql::sqlite::curd::{select_all_person, select_person_by_id};
 
     #[test]
     fn test_sqlite(){
@@ -41,5 +41,11 @@ mod tests{
                 println!("err:{}",sqlite)
             }
         }
+    }
+
+    #[test]
+    fn test_query_by_id(){
+        let person = select_person_by_id(1);
+        println!("id:{},name:{},age:{}",person.id,person.name,person.age)
     }
 }

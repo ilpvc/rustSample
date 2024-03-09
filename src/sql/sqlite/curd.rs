@@ -1,5 +1,4 @@
-use std::env::VarError;
-use std::ptr::null;
+
 use rusqlite;
 use rusqlite::{Connection, Error};
 
@@ -55,6 +54,32 @@ pub fn select_all_person() -> Result<Vec<Person>, Error> {
         persons.push(person.unwrap());
     };
     Ok(persons)
+}
+
+pub fn select_person_by_id(id:i32) -> Person{
+    let connect = create_connect();
+    // let mut statement = connect.prepare(
+    //     "select * from person where id={}"
+    // ).unwrap();
+    // let rows = statement.query_map([id], |row| {
+    //     Ok(Person {
+    //         id: row.get(0).unwrap(),
+    //         name: row.get(1).unwrap(),
+    //         age: row.get(2).unwrap()
+    //     })
+    // }).unwrap();
+
+    let result = connect.query_row(
+        "select * from person where id=?1",
+        [id],
+        |row| {
+            Ok(Person {
+                id: row.get(0).unwrap(),
+                name: row.get(1).unwrap(),
+                age: row.get(2).unwrap()
+            })
+        }).unwrap();
+    result
 }
 
 
