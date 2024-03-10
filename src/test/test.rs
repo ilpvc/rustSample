@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests{
     use crate::sql::sqlite;
-    use crate::sql::sqlite::curd::{select_all_person, select_person_by_id};
+    use crate::sql::sqlite::curd::{delete_person_by_id, Person, select_all_person, select_person_by_id, update_person_by_id};
 
     #[test]
     fn test_sqlite(){
@@ -15,6 +15,7 @@ mod tests{
             }
         }
     }
+
     #[test]
     fn test_sqlite_insert(){
         let name = String::from("colzry");
@@ -47,5 +48,23 @@ mod tests{
     fn test_query_by_id(){
         let person = select_person_by_id(1);
         println!("id:{},name:{},age:{}",person.id,person.name,person.age)
+    }
+
+    #[test]
+    fn test_update_by_id(){
+        let person = Person{
+            id:1,
+            name: String::from("ilpvc的老大哥"),
+            age: 25
+        };
+        let result = update_person_by_id(person).expect("error");
+        println!("{}",result)
+    }
+
+    #[test]
+    fn test_delete_by_id(){
+        let id = 2;
+        let i = delete_person_by_id(2);
+        println!("{}",i)
     }
 }
