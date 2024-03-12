@@ -1,8 +1,9 @@
 #[cfg(test)]
 mod tests{
+    use crate::sql::mysql::curd::{create_dept_table, insert_dept, select_by_id};
+    use crate::sql::mysql::dept::Dept;
     use crate::sql::sqlite;
     use crate::sql::sqlite::curd::{delete_person_by_id, Person, select_all_person, select_person_by_id, update_person_by_id};
-
     #[test]
     fn test_sqlite(){
         let connection = sqlite::curd::create_table();
@@ -21,7 +22,7 @@ mod tests{
         let name = String::from("colzry");
         let age = 18;
 
-        let person = sqlite::curd::Person{
+        let person = Person{
             id:0,
             name,
             age,
@@ -63,8 +64,29 @@ mod tests{
 
     #[test]
     fn test_delete_by_id(){
-        let id = 2;
         let i = delete_person_by_id(2);
         println!("{}",i)
+    }
+
+    #[test]
+    fn test_mysql_create_table(){
+        create_dept_table()
+    }
+
+    #[test]
+    fn test_mysql_insert(){
+        let dept = Dept{
+            id:0,
+            dept_name:String::from("安全部"),
+            created_time:String::from("2024-04-22 12:10:45")
+        };
+        insert_dept(dept)
+    }
+
+    #[test]
+    fn test_mysql_select_by_id(){
+        let option = select_by_id(1);
+        let dept = option.unwrap();
+        println!("{},{},{}",dept.id,dept.dept_name,dept.created_time);
     }
 }
