@@ -4,7 +4,7 @@ use crate::sql::mysql::dept::Dept;
 use crate::sql::sqlite::curd::Person;
 
 fn create_connect() -> PooledConn {
-    let url = "mysql://root:Ilpvc123@8.137.52.241:3306/rust_sample";
+    let url = "mysql://root:@8.137.xxx.xxx:3306/rust_sample";
     let pool = Pool::new(url).expect("连接数据库失败");
     let connect = pool.get_conn().expect("error");
     connect
