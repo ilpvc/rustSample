@@ -44,3 +44,32 @@ pub fn select_by_id(ids: i32) -> Option<Dept> {
         None
     }
 }
+
+
+pub fn select_all_dept() -> Vec<Dept>{
+    let mut conn = create_connect();
+
+    let vec = conn.query_map(
+        "select * from dept",
+        |(id, dept_name, created_time)| {
+            Dept { id, dept_name, created_time }
+        }
+    ).expect("查询失败");
+    vec
+}
+
+pub fn delete_dept_by_id(id:i32){
+    let mut conn = create_connect();
+    conn.exec_drop(
+        "delete from dept where id=?",
+        (id,)
+    ).expect("删除失败");
+}
+
+pub fn update_dept_by_id(dept: Dept) {
+    let mut conn  = create_connect();
+    conn.exec_drop(
+        "update dept set dept_name=?,created_time=? where id=?",
+        (dept.dept_name,dept.created_time,dept.id)
+    ).expect("更新失败");
+}
