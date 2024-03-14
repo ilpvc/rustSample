@@ -1,6 +1,7 @@
 mod http;
 mod sql;
 mod test;
+mod codec;
 
 use http::http_request;
 
