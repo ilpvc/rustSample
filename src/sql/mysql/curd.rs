@@ -1,7 +1,6 @@
 use mysql::*;
 use mysql::prelude::Queryable;
 use crate::sql::mysql::dept::Dept;
-use crate::sql::sqlite::curd::Person;
 
 fn create_connect() -> PooledConn {
     let url = "mysql://root:@8.137.xxx.xxx:3306/rust_sample";
