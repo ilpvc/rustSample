@@ -2,6 +2,7 @@ mod http;
 mod sql;
 mod test;
 mod codec;
+mod thread;
 
 use http::http_request;
 
