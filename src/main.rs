@@ -3,6 +3,7 @@ mod sql;
 mod test;
 mod codec;
 mod thread;
+mod normal;
 
 use http::http_request;
 

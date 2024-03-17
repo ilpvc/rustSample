@@ -1,7 +1,6 @@
 #[cfg(test)]
 mod tests {
     use std::thread;
-    use std::thread::*;
     #[test]
     fn test1(){
         /**
